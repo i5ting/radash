@@ -28,7 +28,8 @@
     "docs:build": "chiller build --ci",
     "lint": "tslint -p tsconfig.json",
     "format": "prettier --write \"src/**/*.ts\"",
-    "format:check": "prettier --check \"src/**/*.ts\" --ignore-unknown"
+    "format:check": "prettier --check \"src/**/*.ts\" --ignore-unknown",
+    "dev": "ts-node-dev --respawn test.ts"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^10.0.1",

@@ -1,9 +1,26 @@
+/**
+ * Type checking utilities
+ * 类型检查工具
+ */
+
+/**
+ * Check if value is undefined
+ * 检查值是否为 undefined
+ */
 export const isSymbol = (value: any): value is symbol => {
   return !!value && value.constructor === Symbol
 }
 
+/**
+ * Check if value is null
+ * 检查值是否为 null
+ */
 export const isArray = Array.isArray
 
+/**
+ * Check if value is null or undefined
+ * 检查值是否为 null 或 undefined
+ */
 export const isObject = (value: any): value is object => {
   return !!value && value.constructor === Object
 }
@@ -24,22 +41,42 @@ export const isPrimitive = (value: any): boolean => {
   )
 }
 
+/**
+ * Check if value is a function
+ * 检查值是否为函数
+ */
 export const isFunction = (value: any): value is Function => {
   return !!(value && value.constructor && value.call && value.apply)
 }
 
+/**
+ * Check if value is a string
+ * 检查值是否为字符串
+ */
 export const isString = (value: any): value is string => {
   return typeof value === 'string' || value instanceof String
 }
 
+/**
+ * Check if value is a boolean
+ * 检查值是否为布尔值
+ */
 export const isInt = (value: any): value is number => {
   return isNumber(value) && value % 1 === 0
 }
 
+/**
+ * Check if value is a number
+ * 检查值是否为数字
+ */
 export const isFloat = (value: any): value is number => {
   return isNumber(value) && value % 1 !== 0
 }
 
+/**
+ * Check if value is a number
+ * 检查值是否为数字
+ */
 export const isNumber = (value: any): value is number => {
   try {
     return Number(value) === value
@@ -48,6 +85,10 @@ export const isNumber = (value: any): value is number => {
   }
 }
 
+/**
+ * Check if value is a date
+ * 检查值是否为日期
+ */
 export const isDate = (value: any): value is Date => {
   return Object.prototype.toString.call(value) === '[object Date]'
 }
@@ -64,6 +105,10 @@ export const isPromise = (value: any): value is Promise<any> => {
   return true
 }
 
+/**
+ * Check if value is empty
+ * 检查值是否为空
+ */
 export const isEmpty = (value: any) => {
   if (value === true || value === false) return true
   if (value === null || value === undefined) return true

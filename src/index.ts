@@ -1,3 +1,11 @@
+/**
+ * Main entry point for the library
+ * 库的主入口点
+ */
+
+// Export all utility functions
+// 导出所有工具函数
+
 export {
   alphabetical,
   boil,

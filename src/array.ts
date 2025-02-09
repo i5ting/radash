@@ -1,9 +1,16 @@
 import { isArray, isFunction } from './typed'
 
 /**
+ * Array manipulation utilities
+ * 数组操作工具
+ */
+
+/**
  * Sorts an array of items into groups. The return value is a map where the keys are
  * the group ids the given getGroupId function produced and the value is an array of
  * each item in that group.
+ *
+ * 将数组项分组。返回值是一个映射,其中键是给定的 getGroupId 函数产生的组 ID,值是该组中每个项的数组。
  */
 export const group = <T, Key extends string | number | symbol>(
   array: readonly T[],
@@ -23,6 +30,10 @@ export const group = <T, Key extends string | number | symbol>(
  * second elements of the given arrays, and so on.
  *
  * Ex. const zipped = zip(['a', 'b'], [1, 2], [true, false]) // [['a', 1, true], ['b', 2, false]]
+ *
+ * 创建一个分组元素的数组,第一个包含给定数组的第一个元素,第二个包含给定数组的第二个元素,依此类推。
+ *
+ * 例如: const zipped = zip(['a', 'b'], [1, 2], [true, false]) // [['a', 1, true], ['b', 2, false]]
  */
 export function zip<T1, T2, T3, T4, T5>(
   array1: T1[],
@@ -56,6 +67,12 @@ export function zip<T>(...arrays: T[][]): T[][] {
  * Ex. const zipped = zipToObject(['a', 'b'], [1, 2]) // { a: 1, b: 2 }
  * Ex. const zipped = zipToObject(['a', 'b'], (k, i) => k + i) // { a: 'a0', b: 'b1' }
  * Ex. const zipped = zipToObject(['a', 'b'], 1) // { a: 1, b: 1 }
+ *
+ * 创建一个对象,将指定的键映射到其对应的值
+ *
+ * 例如: const zipped = zipToObject(['a', 'b'], [1, 2]) // { a: 1, b: 2 }
+ * 例如: const zipped = zipToObject(['a', 'b'], (k, i) => k + i) // { a: 'a0', b: 'b1' }
+ * 例如: const zipped = zipToObject(['a', 'b'], 1) // { a: 1, b: 1 }
  */
 export function zipToObject<K extends string | number | symbol, V>(
   keys: K[],
@@ -83,6 +100,11 @@ export function zipToObject<K extends string | number | symbol, V>(
  * compare that to the next item in the list with the same
  *
  * Ex. const greatest = () => boil(numbers, (a, b) => a > b)
+ *
+ * 遍历项目列表,从第一项开始,与第二项比较。保留你想要的那一个,
+ * 然后用相同的方式与列表中的下一项进行比较
+ *
+ * 例如: const greatest = () => boil(numbers, (a, b) => a > b)
  */
 export const boil = <T>(
   array: readonly T[],
@@ -95,6 +117,8 @@ export const boil = <T>(
 /**
  * Sum all numbers in an array. Optionally provide a function
  * to convert objects in the array to number values.
+ *
+ * 对数组中的所有数字求和。可以选择提供一个函数将数组中的对象转换为数值。
  */
 export function sum<T extends number>(array: readonly T[]): number
 export function sum<T extends object>(
@@ -110,6 +134,8 @@ export function sum<T extends object | number>(
 
 /**
  * Get the first item in an array or a default value
+ *
+ * 获取数组中的第一项或默认值
  */
 export const first = <T>(
   array: readonly T[],
@@ -120,6 +146,8 @@ export const first = <T>(
 
 /**
  * Get the last item in an array or a default value
+ *
+ * 获取数组中的最后一项或默认值
  */
 export const last = <T>(
   array: readonly T[],
@@ -131,6 +159,8 @@ export const last = <T>(
 /**
  * Sort an array without modifying it and return
  * the newly sorted value
+ *
+ * 对数组进行排序而不修改它,并返回新排序的值
  */
 export const sort = <T>(
   array: readonly T[],
@@ -147,6 +177,9 @@ export const sort = <T>(
  * Sort an array without modifying it and return
  * the newly sorted value. Allows for a string
  * sorting value.
+ *
+ * 对数组进行排序而不修改它,并返回新排序的值。
+ * 允许对字符串值进行排序。
  */
 export const alphabetical = <T>(
   array: readonly T[],
@@ -175,6 +208,8 @@ export const counting = <T, TId extends string | number | symbol>(
  * Replace an element in an array with a new
  * item without modifying the array and return
  * the new value
+ *
+ * 用新项替换数组中的一个元素,不修改数组并返回新值
  */
 export const replace = <T>(
   list: readonly T[],
@@ -199,6 +234,8 @@ export const replace = <T>(
 /**
  * Convert an array to a dictionary by mapping each item
  * into a dictionary key & value
+ *
+ * 通过将每个项映射为字典的键和值,将数组转换为字典
  */
 export const objectify = <T, Key extends string | number | symbol, Value = T>(
   array: readonly T[],
@@ -214,6 +251,11 @@ export const objectify = <T, Key extends string | number | symbol, Value = T>(
 /**
  * Select performs a filter and a mapper inside of a reduce,
  * only iterating the list one time.
+ *
+ * @example
+ * select([1, 2, 3, 4], x => x*x, x > 2) == [9, 16]
+ *
+ * Select 在 reduce 内部执行过滤和映射,只遍历列表一次。
  *
  * @example
  * select([1, 2, 3, 4], x => x*x, x > 2) == [9, 16]
@@ -233,6 +275,12 @@ export const select = <T, K>(
 
 /**
  * Max gets the greatest value from a list
+ *
+ * @example
+ * max([ 2, 3, 5]) == 5
+ * max([{ num: 1 }, { num: 2 }], x => x.num) == { num: 2 }
+ *
+ * Max 获取列表中的最大值
  *
  * @example
  * max([ 2, 3, 5]) == 5
@@ -258,6 +306,12 @@ export function max<T>(
  * @example
  * min([1, 2, 3, 4]) == 1
  * min([{ num: 1 }, { num: 2 }], x => x.num) == { num: 1 }
+ *
+ * Min 获取列表中的最小值
+ *
+ * @example
+ * min([1, 2, 3, 4]) == 1
+ * min([{ num: 1 }, { num: 2 }], x => x.num) == { num: 1 }
  */
 export function min(array: readonly [number, ...number[]]): number
 export function min(array: readonly number[]): number | null
@@ -277,6 +331,9 @@ export function min<T>(
  * Splits a single list into many lists of the desired size. If
  * given a list of 10 items and a size of 2, it will return 5
  * lists with 2 items each
+ *
+ * 将单个列表分割成多个指定大小的列表。如果给定一个包含10个项的列表
+ * 和大小为2,它将返回5个列表,每个列表包含2个项
  */
 export const cluster = <T>(list: readonly T[], size: number = 2): T[][] => {
   const clusterCount = Math.ceil(list.length / size)
@@ -290,6 +347,9 @@ export const cluster = <T>(list: readonly T[], size: number = 2): T[][] => {
  * unique items. Accepts an optional identity function
  * to convert each item in the list to a comparable identity
  * value
+ *
+ * 给定一个项目列表,返回一个只包含唯一项的新列表。接受一个可选的标识函数,
+ * 将列表中的每个项转换为可比较的标识值
  */
 export const unique = <T, K extends string | number | symbol>(
   array: readonly T[],
@@ -388,6 +448,8 @@ export const intersects = <T, K extends string | number | symbol>(
 /**
  * Split an array into two array based on
  * a true/false condition function
+ *
+ * 基于一个返回 true/false 的条件函数将数组分割成两个数组
  */
 export const fork = <T>(
   list: readonly T[],
@@ -411,6 +473,9 @@ export const fork = <T>(
  * Given two lists of the same type, iterate the first list
  * and replace items matched by the matcher func in the
  * first place.
+ *
+ * 给定两个相同类型的列表,遍历第一个列表,并在第一个位置用 matcher 函数
+ * 匹配的项替换项。
  */
 export const merge = <T>(
   root: readonly T[],
@@ -433,6 +498,9 @@ export const merge = <T>(
  * Replace an item in an array by a match function condition. If
  * no items match the function condition, appends the new item to
  * the end of the list.
+ *
+ * 通过匹配函数条件替换数组中的一个项。如果没有项匹配该函数条件,
+ * 则将新项追加到列表末尾。
  */
 export const replaceOrAppend = <T>(
   list: readonly T[],
@@ -459,6 +527,9 @@ export const replaceOrAppend = <T>(
  * If the item matching the condition already exists
  * in the list it will be removed. If it does not it
  * will be added.
+ *
+ * 如果列表中已存在匹配条件的项,它将被移除。如果不存在,
+ * 它将被添加。
  */
 export const toggle = <T>(
   list: readonly T[],
@@ -466,6 +537,8 @@ export const toggle = <T>(
   /**
    * Converts an item of type T item into a value that
    * can be checked for equality
+   *
+   * 将 T 类型的项转换为可以检查相等性的值
    */
   toKey?: null | ((item: T, idx: number) => number | string | symbol),
   options?: {
@@ -490,6 +563,8 @@ type Falsy = null | undefined | false | '' | 0 | 0n
 /**
  * Given a list returns a new list with
  * only truthy values
+ *
+ * 给定一个列表,返回一个只包含真值的新列表
  */
 export const sift = <T>(list: readonly (T | Falsy)[]): T[] => {
   return (list?.filter(x => !!x) as T[]) ?? []
@@ -503,6 +578,12 @@ export const sift = <T>(list: readonly (T | Falsy)[]): T[] => {
  * NOTE: This is NOT zero indexed. If you pass count=5
  * you will get 1, 2, 3, 4, 5 iteration in the callback
  * function
+ *
+ * 类似于 reduce 但不需要数组。只需要一个数字,并将函数
+ * 迭代指定的次数。
+ *
+ * 注意:这不是从零开始的索引。如果传入 count=5,
+ * 你将在回调函数中得到 1, 2, 3, 4, 5 的迭代
  */
 export const iterate = <T>(
   count: number,
@@ -519,6 +600,8 @@ export const iterate = <T>(
 /**
  * Returns all items from the first list that
  * do not exist in the second list.
+ *
+ * 返回第一个列表中所有不存在于第二个列表中的项。
  */
 export const diff = <T>(
   root: readonly T[],
@@ -540,6 +623,10 @@ export const diff = <T>(
  * Shift array items by n steps
  * If n > 0 items will shift n steps to the right
  * If n < 0 items will shift n steps to the left
+ *
+ * 将数组项移动 n 步
+ * 如果 n > 0,项目将向右移动 n 步
+ * 如果 n < 0,项目将向左移动 n 步
  */
 export function shift<T>(arr: Array<T>, n: number) {
   if (arr.length === 0) return arr
@@ -549,4 +636,28 @@ export function shift<T>(arr: Array<T>, n: number) {
   if (shiftNumber === 0) return arr
 
   return [...arr.slice(-shiftNumber, arr.length), ...arr.slice(0, -shiftNumber)]
+}
+
+/**
+ * Remove duplicates from array
+ * 从数组中移除重复项
+ */
+export const removeDuplicates = <T>(array: readonly T[]): T[] => {
+  const seen = new Set<T>()
+  return array.filter(item => {
+    if (seen.has(item)) return false
+    seen.add(item)
+    return true
+  })
+}
+
+/**
+ * Flatten nested array
+ * 扁平化嵌套数组
+ */
+export const flatten = <T>(array: readonly T[][]): T[] => {
+  return array.reduce((acc, list) => {
+    acc.push(...list)
+    return acc
+  }, [])
 }
