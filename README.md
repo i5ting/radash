@@ -112,6 +112,7 @@ $ npm test -- string.test.ts
 
 ## 总结
 
+使用Cursor读源码还是不错的，对我而言（已有lodash经验，熟悉技术栈，同时带着问题），效率翻倍不过分。
 
 关于编辑器，新手引导welcome功能设计的还行，就是chat with codebase不好找，首先cmd + l进入chat窗口，输入内容后，enter是当前文件，cmd + enter是基于codebase做的处理。交互没问题，但引导设计的不舒服。
 
