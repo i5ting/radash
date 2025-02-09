@@ -1,7 +1,7 @@
 # 使用Cursor读Radash源码
 
 
-lodash过时了，参考https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore。其实原因很简单，主要是es native新语法更新导致的。虽然native可以实现，但有时候还是希望简单一点，又不想用lodash所有api，Radash是一个很好的选择。
+lodash过时了，参考[You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)。其实原因很简单，主要是es native新语法更新导致的。虽然native可以实现，但有时候还是希望简单一点，又不想用lodash所有api，Radash是一个很好的选择。
 
 Radash 是一个现代化的工具库，旨在为 lodash 提供一个更加现代的替代方案。它注重可读性和易用性，提供了诸如 tryit 和 retry 等多种实用函数。Radash 最突出的特点之一是，它的大多数函数都可以直接复制到你的项目中使用，无需安装，这使得它对寻求快速解决方案的开发者来说非常方便。
 
